@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Table - Lab 5</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<body class="bg-white p-4 md:p-8 font-sans text-gray-800 antialiased">
+<div class="max-w-[1200px] mx-auto">
+    <div class="flex justify-between items-center mb-4 px-2 text-sm text-gray-600 font-medium">
+        <div class="flex items-center gap-1 cursor-pointer hover:text-gray-900 transition-colors">
+            <input type="checkbox" class="w-4 h-4 rounded border-gray-300 cursor-pointer accent-gray-600">
+            <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6z"/>
+            </svg>
+        </div>
+
+        <div class="flex items-center gap-6">
+            <button class="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
+                        <path d="M18.327 7.286h-8.044a1.93 1.93 0 0 0-1.925 1.938v10.088c0 1.07.862 1.938 1.925 1.938h8.044a1.93 1.93 0 0 0 1.925-1.938V9.224c0-1.07-.862-1.938-1.925-1.938"/>
+                        <path d="M15.642 7.286V4.688c0-.514-.203-1.007-.564-1.37a1.92 1.92 0 0 0-1.361-.568H5.673c-.51 0-1 .204-1.36.568a1.95 1.95 0 0 0-.565 1.37v10.088c0 .514.203 1.007.564 1.37s.85.568 1.361.568h2.685"/>
+                    </g>
+                </svg>
+                Display
+            </button>
+            <button class="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M23 5.46H1a1 1 0 0 1 0-2h22a1 1 0 0 1 0 2m-2.34 5.03H3.34a1 1 0 0 1 0-2h17.32a1 1 0 0 1 0 2m-5.45 10.05H8.79a1 1 0 1 1 0-2h6.42a1 1 0 0 1 0 2m3.1-5.03H5.69a1 1 0 1 1 0-2h12.62a1 1 0 0 1 0 2"/>
+                </svg>
+                Sort by
+            </button>
+            <button class="flex items-center gap-1.5 hover:text-gray-900 transition-colors">
+                <svg class="w-4 h-4 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g fill="currentColor"><circle cx="12" cy="18" r="1.75" transform="rotate(-90 12 18)"/><circle cx="12" cy="12" r="1.75" transform="rotate(-90 12 12)"/><circle cx="12" cy="6" r="1.75" transform="rotate(-90 12 6)"/></g>
+                </svg>
+                Actions
+            </button>
+        </div>
+    </div>
+
+    <div class="border border-gray-200 rounded-lg overflow-x-auto shadow-sm">
+        <table class="w-full text-sm text-left whitespace-nowrap">
+            <thead class="bg-gray-50 text-gray-500 border-b border-gray-200">
+            <tr>
+                <th class="p-4 w-12 text-center font-medium"></th>
+                <th class="p-4 font-medium border-r border-gray-200 min-w-[250px]">Address</th>
+                <th class="p-4 font-medium text-center">Skip-Traced?</th>
+                <th class="p-4 font-medium text-center">
+                    <div class="flex items-center justify-center">
+                        Deal Type
+                        <svg class="w-3.5 h-3.5 text-gray-400 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 8v2h1V8zm0 4v5h1v-5z"/>
+                        </svg>
+                    </div>
+                </th>
+                <th class="p-4 font-medium">Est Price/SqFt</th>
+                <th class="p-4 font-medium">
+                    <div class="flex items-center">
+                        Motivation(s)
+                        <svg class="w-3.5 h-3.5 text-gray-400 ml-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M11.5 3a9.5 9.5 0 0 1 9.5 9.5a9.5 9.5 0 0 1-9.5 9.5A9.5 9.5 0 0 1 2 12.5A9.5 9.5 0 0 1 11.5 3m0 1A8.5 8.5 0 0 0 3 12.5a8.5 8.5 0 0 0 8.5 8.5a8.5 8.5 0 0 0 8.5-8.5A8.5 8.5 0 0 0 11.5 4M11 8v2h1V8zm0 4v5h1v-5z"/>
+                        </svg>
+                    </div>
+                </th>
+                <th class="p-4 font-medium">Property Status</th>
+            </tr>
+            </thead>
+
+            <tbody class="bg-white text-gray-700">
+
+            <tr class="bg-white hover:bg-gray-100 transition-colors duration-150">
+                <td class="p-4 text-center">
+                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 cursor-pointer accent-gray-600">
+                </td>
+                <td class="p-4 border-r border-gray-200 align-middle">
+                    <div class="flex justify-between items-center gap-4 pr-2">
+                        <div class="flex flex-col">
+                            <a href="#" class="font-semibold text-gray-700 underline decoration-gray-400 underline-offset-2 hover:text-blue-600">5418 W WASHINGTON BLVD</a>
+                            <span class="text-[13px] text-gray-500 mt-0.5">LOS ANGELES, CA, 90016</span>
+                        </div>
+                        <svg class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M7.5 16.5h9.154l-2.827-3.77l-2.615 3.308l-1.75-2.115zM5 19V5zm3.5-9.5q.414 0 .707-.293T9.5 8.5t-.293-.707T8.5 7.5t-.707.293T7.5 8.5t.293.707t.707.293"/>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 border-b border-gray-100 align-middle">
+                    <div class="flex justify-center items-center">
+                        <svg class="w-5 h-5 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11.5" cy="11.5" r="9.5"/><path stroke-linecap="round" d="M18.5 18.5L22 22M9 11.5h2.5m0 0H14m-2.5 0V14m0-2.5V9"/></g>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 text-center border-b border-gray-100 align-middle">0</td>
+                <td class="p-4 border-b border-gray-100 align-middle"></td>
+                <td class="p-4 border-b border-gray-100 align-middle">8</td>
+                <td class="p-4 text-gray-600 border-b border-gray-100 align-middle">Off Market (Motivated)</td>
+            </tr>
+
+            <tr class="bg-white hover:bg-gray-100 transition-colors duration-150">
+                <td class="p-4 text-center">
+                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 cursor-pointer accent-gray-600">
+                </td>
+                <td class="p-4 border-r border-gray-200 align-middle">
+                    <div class="flex justify-between items-center gap-4 pr-2">
+                        <div class="flex flex-col">
+                            <a href="#" class="font-semibold text-gray-700 underline decoration-gray-400 underline-offset-2 hover:text-blue-600">4221 ABNER ST</a>
+                            <span class="text-[13px] text-gray-500 mt-0.5">LOS ANGELES, CA, 90032</span>
+                        </div>
+                        <svg class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M7.5 16.5h9.154l-2.827-3.77l-2.615 3.308l-1.75-2.115zM5 19V5zm3.5-9.5q.414 0 .707-.293T9.5 8.5t-.293-.707T8.5 7.5t-.707.293T7.5 8.5t.293.707t.707.293"/>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 border-b border-gray-100 align-middle"></td>
+                <td class="p-4 text-center border-b border-gray-100 align-middle">0</td>
+                <td class="p-4 border-b border-gray-100 align-middle">$439</td>
+                <td class="p-4 border-b border-gray-100 align-middle">10</td>
+                <td class="p-4 text-gray-600 border-b border-gray-100 align-middle">Off Market (Motivated)</td>
+            </tr>
+
+            <tr class="bg-white hover:bg-gray-100 transition-colors duration-150">
+                <td class="p-4 text-center">
+                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 cursor-pointer accent-gray-600">
+                </td>
+                <td class="p-4 border-r border-gray-200 align-middle">
+                    <div class="flex justify-between items-center gap-4 pr-2">
+                        <div class="flex flex-col">
+                            <a href="#" class="font-semibold text-gray-700 underline decoration-gray-400 underline-offset-2 hover:text-blue-600">121 S HOPE ST APT 506</a>
+                            <span class="text-[13px] text-gray-500 mt-0.5">LOS ANGELES, CA, 90012</span>
+                        </div>
+                        <svg class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M7.5 16.5h9.154l-2.827-3.77l-2.615 3.308l-1.75-2.115zM5 19V5zm3.5-9.5q.414 0 .707-.293T9.5 8.5t-.293-.707T8.5 7.5t-.707.293T7.5 8.5t.293.707t.707.293"/>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 border-b border-gray-100 align-middle">
+                    <div class="flex justify-center items-center">
+                        <svg class="w-5 h-5 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <g fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11.5" cy="11.5" r="9.5"/><path stroke-linecap="round" d="M18.5 18.5L22 22M9 11.5h2.5m0 0H14m-2.5 0V14m0-2.5V9"/></g>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 text-center border-b border-gray-100 align-middle">0</td>
+                <td class="p-4 border-b border-gray-100 align-middle">$562</td>
+                <td class="p-4 border-b border-gray-100 align-middle">10</td>
+                <td class="p-4 text-gray-600 border-b border-gray-100 align-middle">Off Market (Motivated)</td>
+            </tr>
+
+            <tr class="bg-white hover:bg-gray-100 transition-colors duration-150">
+                <td class="p-4 text-center">
+                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 cursor-pointer accent-gray-600">
+                </td>
+                <td class="p-4 border-r border-gray-200 align-middle">
+                    <div class="flex justify-between items-center gap-4 pr-2">
+                        <div class="flex flex-col">
+                            <a href="#" class="font-semibold text-gray-700 underline decoration-gray-400 underline-offset-2 hover:text-blue-600">3132 E PICO BLVD</a>
+                            <span class="text-[13px] text-gray-500 mt-0.5">LOS ANGELES, CA, 90023</span>
+                        </div>
+                        <svg class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M7.5 16.5h9.154l-2.827-3.77l-2.615 3.308l-1.75-2.115zM5 19V5zm3.5-9.5q.414 0 .707-.293T9.5 8.5t-.293-.707T8.5 7.5t-.707.293T7.5 8.5t.293.707t.707.293"/>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 border-b border-gray-100 align-middle"></td>
+                <td class="p-4 text-center border-b border-gray-100 align-middle">0</td>
+                <td class="p-4 border-b border-gray-100 align-middle"></td>
+                <td class="p-4 border-b border-gray-100 align-middle">5</td>
+                <td class="p-4 text-gray-600 border-b border-gray-100 align-middle">Off Market (Motivated)</td>
+            </tr>
+
+            <tr class="bg-white hover:bg-gray-100 transition-colors duration-150">
+                <td class="p-4 text-center">
+                    <input type="checkbox" class="w-4 h-4 rounded border-gray-300 cursor-pointer accent-gray-600">
+                </td>
+                <td class="p-4 border-r border-gray-200 align-middle">
+                    <div class="flex justify-between items-center gap-4 pr-2">
+                        <div class="flex flex-col">
+                            <a href="#" class="font-semibold text-gray-700 underline decoration-gray-400 underline-offset-2 hover:text-blue-600">777 E PICO BLVD</a>
+                            <span class="text-[13px] text-gray-500 mt-0.5">LOS ANGELES, CA, 90021</span>
+                        </div>
+                        <svg class="w-6 h-6 flex-shrink-0 text-gray-400 hover:text-gray-600 cursor-pointer" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M5.616 20q-.691 0-1.153-.462T4 18.384V5.616q0-.691.463-1.153T5.616 4h12.769q.69 0 1.153.463T20 5.616v12.769q0 .69-.462 1.153T18.384 20zm0-1h12.769q.23 0 .423-.192t.192-.424V5.616q0-.231-.192-.424T18.384 5H5.616q-.231 0-.424.192T5 5.616v12.769q0 .23.192.423t.423.192M7.5 16.5h9.154l-2.827-3.77l-2.615 3.308l-1.75-2.115zM5 19V5zm3.5-9.5q.414 0 .707-.293T9.5 8.5t-.293-.707T8.5 7.5t-.707.293T7.5 8.5t.293.707t.707.293"/>
+                        </svg>
+                    </div>
+                </td>
+                <td class="p-4 align-middle"></td>
+                <td class="p-4 text-center align-middle">0</td>
+                <td class="p-4 align-middle"></td>
+                <td class="p-4 align-middle">6</td>
+                <td class="p-4 text-gray-600 align-middle">Off Market (Motivated)</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
