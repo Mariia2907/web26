@@ -33,7 +33,22 @@ useSeoMeta({
           <AppLogo class="w-auto h-6 shrink-0" />
         </NuxtLink>
 
-        <TemplateMenu />
+        <div class="flex items-center gap-1 ml-4">
+          <UButton
+            to="/"
+            label="Список продуктів"
+            color="neutral"
+            variant="ghost"
+            active-class="bg-gray-100 dark:bg-gray-800"
+          />
+          <UButton
+            to="/table"
+            label="Таблиця продуктів"
+            color="neutral"
+            variant="ghost"
+            active-class="bg-gray-100 dark:bg-gray-800"
+          />
+        </div>
       </template>
 
       <template #right>
