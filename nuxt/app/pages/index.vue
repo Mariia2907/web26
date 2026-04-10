@@ -47,7 +47,12 @@ const { data: productsData } = await useFetch('/api/products')
               {{ product.tooltip }}
               <div class="absolute top-full left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-[#333333]"></div>
             </div>
-            <button class="w-full bg-gradient-to-r from-[#fcd34d] to-[#f97316] text-gray-900 font-bold text-[15px] py-2.5 rounded border border-transparent hover:border-gray-800 hover:opacity-90 transition-all duration-200">{{ product.buttonText }}</button>
+            <NuxtLink
+              :to="`/checkout/${product.id}`"
+              class="w-full block text-center bg-gradient-to-r from-[#fcd34d] to-[#f97316] text-gray-900 font-bold text-[15px] py-2.5 rounded border border-transparent hover:border-gray-800 hover:opacity-90 transition-all duration-200"
+            >
+              {{ product.buttonText }}
+            </NuxtLink>
           </div>
           <hr class="border-gray-100 mb-6">
           <ul class="space-y-4 flex-1">

@@ -20,7 +20,6 @@ type Product = {
 }
 
 const { data, status } = await useFetch<{ products: Product[] }>('/api/products-table')
-
 const products = computed<Product[]>(() => data.value?.products || [])
 const globalFilter = ref('')
 const pagination = ref({ pageIndex: 0, pageSize: 5 })
