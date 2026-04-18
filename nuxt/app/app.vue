@@ -35,7 +35,7 @@ useSeoMeta({
 
         <div class="flex items-center gap-1 ml-4">
           <UButton
-            to="/"
+            to="/products"
             label="Список продуктів"
             color="neutral"
             variant="ghost"

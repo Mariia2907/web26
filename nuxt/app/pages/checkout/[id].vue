@@ -1,7 +1,19 @@
 <script setup>
 const route = useRoute()
-
-const { data: product, pending } = await useFetch(`/api/products/${route.params.id}`)
+const subscriptionStore = useSubscriptionStore()
+const { data: product, pending } = await useAsyncData(
+  `product-${route.params.id}`,
+  async () => {
+    if (subscriptionStore.selectedSubscription && subscriptionStore.selectedSubscription.id === Number(route.params.id)) {
+      console.log('Дані взяті з Pinia')
+      return subscriptionStore.selectedSubscription
+    }
+    console.log('Стор порожній, завантажуємо з API...')
+    const data = await $fetch(`/api/products/${route.params.id}`)
+    subscriptionStore.setSubscription(data)
+    return data
+  }
+)
 
 useHead({
   title: computed(() => product.value ? `Checkout - ${product.value.name}` : 'Checkout')
