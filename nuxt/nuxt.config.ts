@@ -27,5 +27,11 @@ export default defineNuxtConfig({
         braceStyle: '1tbs'
       }
     }
+  },
+
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:80'
+    }
   }
 })
