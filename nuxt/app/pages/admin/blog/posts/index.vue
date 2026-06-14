@@ -71,7 +71,7 @@ const columns = [
     cell: ({ row }: any) => h(
       resolveComponent('NuxtLink'),
       {
-        to: `/blog/posts/${row.original.id}`,
+        to: `/admin/blog/posts/${row.original.id}`,
         class: 'text-primary-600 hover:underline font-medium',
       },
       () => row.original.title
