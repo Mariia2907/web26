@@ -48,6 +48,23 @@ useSeoMeta({
             variant="ghost"
             active-class="bg-gray-100 dark:bg-gray-800"
           />
+
+          <div class="w-px h-5 bg-gray-200 mx-1" />
+
+          <UButton
+            to="/admin/blog/posts"
+            label="Пости"
+            color="neutral"
+            variant="ghost"
+            active-class="bg-gray-100 dark:bg-gray-800"
+          />
+          <UButton
+            to="/admin/blog/categories"
+            label="Категорії"
+            color="neutral"
+            variant="ghost"
+            active-class="bg-gray-100 dark:bg-gray-800"
+          />
         </div>
       </template>
 

@@ -1,24 +1,24 @@
 <template>
   <div class="container mx-auto px-4 py-8">
     <div class="mb-6">
-      <h1 class="text-2xl font-bold text-gray-900">Пости</h1>
-      <p class="text-sm text-gray-400 mt-1">Управління статтями блогу</p>
+      <h1 class="text-2xl font-bold text-gray-900">Категорії</h1>
+      <p class="text-sm text-gray-400 mt-1">Управління категоріями блогу</p>
     </div>
 
     <div class="flex items-center gap-3 mb-4 bg-white border border-gray-200 rounded-xl px-4 py-3">
       <UInput
         v-model="search"
-        placeholder="Пошук за заголовком або категорією..."
+        placeholder="Пошук за назвою..."
         icon="i-heroicons-magnifying-glass"
         class="w-80"
         @input="onSearchInput"
       />
-
       <select
         v-model="perPage"
         class="border border-gray-200 rounded-lg px-3 py-1.5 text-sm text-gray-600 focus:outline-none focus:ring-2 focus:ring-primary-500 bg-gray-50"
         @change="onPerPageChange"
       >
+        <option :value="5">5</option>
         <option :value="10">10</option>
         <option :value="25">25</option>
         <option :value="50">50</option>
@@ -26,43 +26,22 @@
         <option :value="100">100</option>
       </select>
       <span class="text-sm text-gray-400">на сторінці</span>
-
       <span class="text-sm text-gray-400 ml-auto">
         Знайдено: <strong class="text-gray-700">{{ total }}</strong>
       </span>
-
       <div class="w-px h-5 bg-gray-200" />
-
       <UButton
         icon="i-heroicons-plus"
         color="primary"
         size="sm"
-        to="/admin/blog/posts/create"
+        to="/admin/blog/categories/create"
       >
-        Створити пост
+        Створити категорію
       </UButton>
     </div>
 
     <div class="border border-gray-200 rounded-xl overflow-hidden bg-white">
-      <UTable
-        :data="posts"
-        :columns="columns"
-        :loading="loading"
-        :ui="{
-          tr: 'hover:bg-gray-50 transition-colors cursor-pointer',
-        }"
-      >
-        <template #status-cell="{ row }">
-          <span
-            class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium"
-            :class="row.original.is_published
-              ? 'bg-green-100 text-green-700'
-              : 'bg-amber-100 text-amber-700'"
-          >
-            {{ row.original.is_published ? 'Опубліковано' : 'Чернетка' }}
-          </span>
-        </template>
-
+      <UTable :data="categories" :columns="columns" :loading="loading" :ui="{ tr: 'hover:bg-gray-50 transition-colors cursor-pointer' }">
         <template #actions-cell="{ row }">
           <UDropdownMenu :items="getRowActions(row.original)">
             <UButton
@@ -87,12 +66,7 @@
     <UModal v-model:open="deleteModal.open">
       <template #content>
         <div class="p-6">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
-              <UIcon name="i-heroicons-trash" class="text-red-600 text-lg" />
-            </div>
-            <h3 class="text-lg font-semibold">Видалити пост?</h3>
-          </div>
+          <h3 class="text-lg font-semibold mb-2">Видалити категорію?</h3>
           <p class="text-sm text-gray-500 mb-6">
             Ви впевнені що хочете видалити <strong>{{ deleteModal.title }}</strong>? Цю дію не можна скасувати.
           </p>
@@ -111,8 +85,6 @@
 </template>
 
 <script setup lang="ts">
-import { h, resolveComponent } from 'vue'
-
 const config = useRuntimeConfig()
 const router = useRouter()
 const toast = useToast()
@@ -122,7 +94,7 @@ const perPage = ref(25)
 const total = ref(0)
 const loading = ref(false)
 const search = ref('')
-const posts = ref<any[]>([])
+const categories = ref<any[]>([])
 
 const deleteModal = ref({
   open: false,
@@ -133,12 +105,12 @@ const deleteModal = ref({
 
 let searchTimeout: ReturnType<typeof setTimeout> | null = null
 
-const getRowActions = (post: any) => [
+const getRowActions = (category: any) => [
   [
     {
       label: 'Редагувати',
       icon: 'i-heroicons-pencil-square',
-      onSelect: () => router.push(`/admin/blog/posts/${post.id}/edit`),
+      onSelect: () => router.push(`/admin/blog/categories/${category.id}/edit`),
     },
   ],
   [
@@ -147,77 +119,75 @@ const getRowActions = (post: any) => [
       icon: 'i-heroicons-trash',
       color: 'error' as const,
       onSelect: () => {
-        deleteModal.value = { open: true, id: post.id, title: post.title, loading: false }
+        deleteModal.value = { open: true, id: category.id, title: category.title, loading: false }
       },
     },
   ],
 ]
 
+import { h, resolveComponent } from 'vue'
+
 const columns = [
-  { accessorKey: 'id', header: '#', size: 60 },
-  {
-    id: 'status',
-    header: 'Статус',
-    cell: () => null,
-    size: 120,
-  },
-  { accessorKey: 'author_name', header: 'Автор' },
-  { accessorKey: 'category_title', header: 'Категорія' },
+  { accessorKey: 'id', header: '#' },
   {
     accessorKey: 'title',
-    header: 'Заголовок',
+    header: 'Назва',
     cell: ({ row }: any) => h(
       resolveComponent('NuxtLink'),
       {
-        to: `/admin/blog/posts/${row.original.id}`,
+        to: `/admin/blog/categories/${row.original.id}`,
         class: 'text-primary-600 hover:underline font-medium',
       },
       () => row.original.title
     ),
   },
-  { accessorKey: 'date_published', header: 'Дата публікації' },
+  { accessorKey: 'slug', header: 'Slug' },
+  { accessorKey: 'description', header: 'Опис' },
+  { accessorKey: 'parent_title', header: 'Батьківська категорія' },
   {
     id: 'actions',
     header: 'Дії',
     cell: () => null,
-    size: 50,
   },
 ]
 
-const getPosts = async () => {
+const getCategories = async () => {
   loading.value = true
-  const response: any = await $fetch(
-    config.public.apiBase + '/api/admin/blog/posts',
-    {
-      params: {
-        page: currentPage.value,
-        per_page: perPage.value,
-        search: search.value || undefined,
-      },
-    }
-  )
-  posts.value = response.data.map((post: any) => ({
-    ...post,
-    author_name: post.author_name ?? '—',
-    category_title: post.category_title ?? '—',
-    date_published: post.date_published ?? '—',
-  }))
-  total.value = response.meta.total
-  loading.value = false
+  try {
+    const response: any = await $fetch(
+      config.public.apiBase + '/api/admin/blog/categories',
+      {
+        params: {
+          page: currentPage.value,
+          per_page: perPage.value,
+          search: search.value || undefined,
+        },
+      }
+    )
+    categories.value = response.data.map((cat: any) => ({
+      ...cat,
+      description: cat.description ?? '—',
+      parent_title: cat.parent_title ?? '—',
+    }))
+    total.value = response.meta.total
+  } finally {
+    loading.value = false
+  }
 }
 
 const confirmDelete = async () => {
   if (!deleteModal.value.id) return
   deleteModal.value.loading = true
   try {
-    const res: any = await $fetch(config.public.apiBase + '/api/admin/blog/posts/' + deleteModal.value.id, {
-      method: 'DELETE',
-    })
+    const res: any = await $fetch(
+      config.public.apiBase + '/api/admin/blog/categories/' + deleteModal.value.id,
+      { method: 'DELETE' }
+    )
     deleteModal.value.open = false
-    toast.add({ title: 'Успішно', description: res.message ?? 'Пост видалено', color: 'success' })
-    getPosts()
+    toast.add({ title: 'Успішно', description: res.message ?? 'Категорію видалено', color: 'success' })
+    getCategories()
   } catch {
-    toast.add({ title: 'Помилка', description: 'Не вдалось видалити пост', color: 'error' })
+    toast.add({ title: 'Помилка', description: 'Не вдалось видалити категорію', color: 'error' })
   } finally {
     deleteModal.value.loading = false
   }
@@ -227,15 +197,15 @@ const onSearchInput = () => {
   if (searchTimeout) clearTimeout(searchTimeout)
   searchTimeout = setTimeout(() => {
     currentPage.value = 1
-    getPosts()
+    getCategories()
   }, 400)
 }
 
 const onPerPageChange = () => {
   currentPage.value = 1
-  getPosts()
+  getCategories()
 }
 
-watch(currentPage, getPosts)
-getPosts()
+watch(currentPage, getCategories)
+getCategories()
 </script>
